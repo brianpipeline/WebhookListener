@@ -14,7 +14,7 @@ import java.util.Map;
 @RequestMapping("/api")
 public class GithubController {
     @PostMapping("/github-webhook")
-    ResponseEntity<Void> receivePayload(@RequestBody Map<String, Object> payload) {
+    ResponseEntity<Void> receivePayload(@RequestBody WebhookPojo payload) {
         Gson gson = new Gson();
         String json = gson.toJson(payload);
         System.out.println(json);
