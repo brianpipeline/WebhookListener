@@ -1,5 +1,6 @@
 package com.brianpipeline.webhooklistener.github;
 
+import com.google.gson.Gson;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -12,13 +13,11 @@ import java.util.Map;
 @Controller
 @RequestMapping("/api")
 public class GithubController {
-
-    public GithubController() {
-    }
-
     @PostMapping("/github-webhook")
     ResponseEntity<Void> receivePayload(@RequestBody Map<String, Object> payload) {
-        System.out.println(payload);
+        Gson gson = new Gson();
+        String json = gson.toJson(payload);
+        System.out.println(json);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
