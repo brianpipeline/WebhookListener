@@ -1,25 +1,32 @@
 package com.brianpipeline.webhooklistener.github;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Builder
 @Data
 public class WebhookPojo {
     private final String ref;
+
     private final Repository repository;
-    private final HeadCommit head_commit;
+
+    @JsonProperty("head_commit")
+    private final HeadCommit headCommit;
 
 
     @Builder
     @Data
-    private static final class Repository {
-        private final String clone_url;
+    @AllArgsConstructor
+    @NoArgsConstructor(force = true)
+    public static final class Repository {
+        @JsonProperty("clone_url")
+        private final String cloneUrl;
     }
 
-    @Builder
-    @Data
-    private static final class HeadCommit {
-        private final String id;
+
+    public record HeadCommit(String id) {
     }
 }
